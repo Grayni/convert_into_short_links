@@ -1,0 +1,60 @@
+// custom code sass
+$h-100: 100%
+$px-10: 10px
+$px-50: 50px
+$px-200: 200px
+$px-300: 300px
+$px-32: 18px
+$px-700: 700px
+$center: center
+$cur-point: pointer
+$ziro: 0
+$n: none
+$shadow-block: 0 0 4px #1a1a22
+
+//$palette: rgba()
+
+@mixin transition($time)
+  transition: $time ease
+
+
+html,
+body,
+.container,
+.row
+  height: $h-100
+
+body
+  background: $gray-800
+
+  .card
+    box-shadow: $shadow-block
+    display: $n
+    height: $px-300
+    max-width: $px-700
+    padding: $ziro
+
+  .card-header
+    text-align: $center
+
+  .btn
+    &.btn-success
+      cursor: $cur-point
+      font-size: $px-32
+      height: $px-50
+      width: $px-200
+
+.copy
+  display: $n
+  margin: $ziro
+
+  .icon-docs,
+  .sh-link
+    cursor: $cur-point
+
+  .sh-link
+    line-height: 40px
+    margin-left: $px-10
+
+
+
