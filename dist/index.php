@@ -13,7 +13,7 @@
                     <div class="card-body">
 
                         <?php
-                            require_once '../connect.php';
+                            require_once 'connect.php';
 
                             // Определим собственный класс исключений для ошибок MySQL
                             class MySQL_Exception extends Exception {
@@ -32,11 +32,13 @@
                         ?>
 
                         <form action="" method="POST">
-                            <input type="text" name="link" class="form-control form-control-lg" placeholder="Вставьте вашу ссылку">
+
+                            <input type="text" name="link" class="form-control form-control-lg" placeholder="Вставьте вашу ссылку" autofocus="autofocus" required="Поле обязательное для заполнения">
+
                             <br>
-                            <label class="sr-only" for="inlineFormInputGroup">Username</label>
-                            <div class="input-group mb-2 mb-sm-0">
-                                <div class="input-group-addon">http://grayni.ru/</div>
+
+                            <div class="input-group">
+                                <div class="input-group-addon">http://links.grayni.ru/</div>
                                     <input type="text" name="link" class="form-control form-control-lg" id="inlineFormInputGroup" placeholder="ваше_предпочтение">
                                 </div>
                             </div>
@@ -44,11 +46,14 @@
                             <div class="row">
                                 <div class="col"></div>
                                 <div class="col-auto">
-                                    <input type="button" class="btn btn-success" value='Генерировать'></input>
+                                    <input type="button" class="btn btn-success" value='Генерировать'>
                                 </div>
                                 <div class="col"></div>
                             </div>
-                        </form></br>
+
+                        </form>
+
+                        </br>
 
                         <div class="row copy">
                             <div class="col-auto">

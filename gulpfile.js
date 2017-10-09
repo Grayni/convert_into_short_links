@@ -55,7 +55,7 @@ var
   rigger        = require('gulp-rigger'),
   plumber       = require('gulp-plumber'),
   uncss         = require('gulp-uncss'),
-  stripCss     = require('gulp-strip-code');
+  strip         = require('gulp-strip-code');
   plugin.imagemin.pngquant  = require('imagemin-pngquant');
   plugin.imagemin.mozjpeg   = require('imagemin-mozjpeg');
 
@@ -98,7 +98,7 @@ gulp.task('scripts', function() {
 });
 
 // run SERVER and watch change files dir:'app'
-gulp.task('app', ['sass','scripts','browserSync'], function() {
+gulp.task('app', ['scripts','sass','browserSync'], function() {
   gulp.watch('app/sass/*.+(sass|scss)', ['sass']);
   gulp.watch('app/js/*.js', ['scripts', browserSync.reload]);
   gulp.watch('app/*.+(html|php)', browserSync.reload);
@@ -140,10 +140,11 @@ gulp.task('min-js',['scripts'] , function() {
 
 gulp.task('min-css',['sass'], function() {
   return gulp.src('app/css/style.css')
-  .pipe(stripCss())
   .pipe(uncss({
-            html: ['app/index.php', 'dist/index.php']
+            html: ['app/index.php'],
+            ignore: ['.tooltip-inner', '.arrow', '.arrow::before']
         }))
+  .pipe(strip())
   .pipe(gulp.dest('dist/css'))
   .pipe(rename('style.min.css'))
   .pipe(cssnano())
@@ -161,7 +162,7 @@ gulp.task('fixHtml', function() {
 });
 
 // build file of project
-gulp.task('build',['clear','img','min-css','min-js','fixHtml'], function() {
+gulp.task('build',['clear','img','fixHtml','min-js','min-css'], function() {
   let arr = ['app/fonts/**/*', 'dist/fonts'];
   gulp.src(arr[0])
   .pipe(gulp.dest(arr[1]))
@@ -188,6 +189,7 @@ gulp.task('browserSync2', function() {
 // run SERVER and watch change files dir:'dist'
 gulp.task('dist', ['build','browserSync2'], function() {
   gulp.watch('app/sass/*.+(sass|scss)', ['min-css', browserSync2.reload]);
+  gulp.watch('app/css/custom.css', ['min-css', browserSync2.reload]);
   gulp.watch('app/js/*.js', ['min-js', browserSync2.reload]);
   gulp.watch('app/*.+(html|php)', ['fixHtml', browserSync2.reload]);
 });
