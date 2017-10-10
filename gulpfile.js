@@ -154,25 +154,29 @@ gulp.task('min-css',['sass'], function() {
 
 // fix way JS in HTML and end build-process
 gulp.task('fixHtml', function() {
-  gulp.src('app/*.+(html|php)')
+  gulp.src(['app/*.+(html|php|txt)','app/.htaccess'])
   .pipe(replace('css/style.css','css/style.min.css'))
   .pipe(replace('js/main.js','js/main.min.js'))
   .pipe(plumber())
   .pipe(gulp.dest('dist'));
 });
 
+// add dir /pages/ in dist
+gulp.task('pagesPhp', function() {
+  gulp.src('app/pages/*.+(html|php)')
+  .pipe(gulp.dest('dist/pages'));
+});
+
 // build file of project
-gulp.task('build',['clear','img','fixHtml','min-js','min-css'], function() {
+gulp.task('build',['clear','img','fixHtml','pagesPhp','min-js','min-css'], function() {
   let arr = ['app/fonts/**/*', 'dist/fonts'];
   gulp.src(arr[0])
   .pipe(gulp.dest(arr[1]))
   .pipe(plumber());
 });
 
-
 // save project in 'dist'
 gulp.task('save', ['build']);
-
 
 /*test finish-result*/
 // setting server2 for 'dist'
@@ -191,7 +195,7 @@ gulp.task('dist', ['build','browserSync2'], function() {
   gulp.watch('app/sass/*.+(sass|scss)', ['min-css', browserSync2.reload]);
   gulp.watch('app/css/custom.css', ['min-css', browserSync2.reload]);
   gulp.watch('app/js/*.js', ['min-js', browserSync2.reload]);
-  gulp.watch('app/*.+(html|php)', ['fixHtml', browserSync2.reload]);
+  gulp.watch('app/**/*.+(html|php)', ['fixHtml', browserSync2.reload]);
 });
 
 
