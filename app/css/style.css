@@ -6274,8 +6274,3 @@ body .btn.btn-success {
   line-height: 40px;
   margin-left: 10px;
 }
-
-.copy input {
-  required-invalid-background: #dc3545;
-  required-valid-background: #28a745;
-}

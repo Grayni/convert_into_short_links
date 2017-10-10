@@ -15,8 +15,11 @@ $(document).ready(function() {
       });
     });
   });
-  $('.btn-success').on('click', function() {
-    $('.card').animate({'height': '340px'}); 
-      $('.copy').css('display', 'flex').hide().fadeIn(200);
-  });
+
+  if ($('#long-link').val()) {
+    $('.btn-success').on('click', function() {
+      $('.card').animate({'height': '340px'}); 
+        $('.copy').css('display', 'flex').hide().fadeIn(200);
+    });
+  }
 });

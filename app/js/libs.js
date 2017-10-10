@@ -5,3 +5,4 @@
 //= ../libs/bootstrap/js/dist/util.js
 //= ../../node_modules/clipboard/dist/clipboard.min.js
 //= custom.js
+//= ajax.js
