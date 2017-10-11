@@ -1,4 +1,4 @@
-$('document').ready(function() {
+/*$('document').ready(function() {
 
     // for old explore
     function getXMLHttpRequest() {
@@ -24,4 +24,4 @@ $('document').ready(function() {
     request.open('GET', '../script.php', true);
     request.send(null);
 
-});
+});*/
