@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -12,34 +13,16 @@
 					<div class="card-header">Используйте оба поля вместе, если хотите создать оригинальную ссылку</div>
 					<div class="card-body">
 
-						<?php
-							require_once 'connect.php';
+						<form action="/" method="POST" id="formLinks">
 
-							// Определим собственный класс исключений для ошибок MySQL
-							class MySQL_Exception extends Exception {
-								public function __construct($message) {
-									parent::__construct($message);
-								}
-							}
-
-							try {
-								// Запрос к базе данных
-								$result = mysqli_query($link, "SHOW TABLES");
-								
-								// В случае неудачного запроса генерируем исключение
-								if (!$result) throw new MySQL_Exception(mysqli_error($link));
-								$row = mysqli_fetch_row($result);
-						?>
-						<?php include_once('script.php'); ?>
-						<form action="script.php" method="POST">
-
-							<input id="long-link" type="text" name="long-link" class="form-control form-control-lg" placeholder="Вставьте вашу ссылку" autofocus="autofocus" required oninvalid="this.setCustomValidity('Заполните поле')" oninput="setCustomValidity('')" name="long" />
+							<input id="long-link" type="text" name="long-link" class="form-control form-control-lg" placeholder="Вставьте вашу ссылку" name="long" />
 
 							<br>
 
 							<div class="input-group">
+
 								<div class="input-group-addon">http://links.grayni.ru/</div>
-									<input type="text" name="fantasy-link" class="form-control form-control-lg" id="link_default" placeholder="ваше_предпочтение" name="fanasy" />
+									<input id="link-default" type="text" name="fantasy-link" class="form-control form-control-lg" placeholder="ваше_предпочтение"/>
 							</div>
 
 							<br>
@@ -47,8 +30,9 @@
 							<div class="row">
 								<div class="col"></div>
 								<div class="col-auto">
-									<input type="submit" class="btn btn-success" name="send" value='Генерировать' />
+									<input type="submit" class="btn btn-success" name="enter" value='Генерировать' />
 								</div>
+
 								<div class="col"></div>
 							</div>
 
@@ -59,7 +43,7 @@
 						<div class="row copy">
 							<div class="col-auto">
 								<span>Ваша ссылка:
-									<a href='#' class='sh-link' id='sh-link'><?php echo "{$row[0]}"?></a>
+									<a href='#' class='sh-link' id='sh-link'>Тестовая ссылка</a>
 								</span>
 							</div>
 
@@ -68,15 +52,10 @@
 							</div>
 						</div>
 
-						<?php
-							}
-							catch (Exception $ex) {
-								echo 'Ошибка при работе с MySQL: <b style="color:red;">'.$ex->getMessage().'</b>';
-							}
-						?>
-
 					</div>
-					<div id="result_form" style="width: 500px;height:50px;background:#ffffff;"><div> 
+					<div id="result_form" style="background:#ffffff;padding: 10px;">
+						<?php include_once 'script.php'; ?>
+					<div> 
 				</div>
 
 				<br>
