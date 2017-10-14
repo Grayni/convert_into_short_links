@@ -1,116 +1,137 @@
 
-$($('ducument').ready(function() {
+$('ducument').ready(function() {
 
+  // load window
   $('body .card').css({'display':'flex'}).hide().fadeIn(1000);
+
 
   // tooltips
   $(function () {
     $('[data-toggle="tooltip"]').tooltip();
   });
 
-  //popovers
+
+  // popovers
   $(function () {
     $('.popover-error').popover({
       container: 'body'
     });
   });
 
-  // Copy buffer
+
+  // copy buffer
   new Clipboard('.icon-docs');
 
   $('#copy-click').on('click', function() {
-    $('.tooltip-inner b').fadeOut(200,function() {
+    $('.tooltip-inner b').fadeOut(200, function() {
       $(this).html('Ссылка скопирована').fadeIn(200, function() {
         $('#copy-click').attr('data-original-title','<b style="font-size:16px">Ссылка скопирована</b>');
       });
     });
   });
 
-  // if ($('#long-link').val()) {
-  //   $('.btn-success').on('click', function() {
-  //     $('.card').animate({'height': '340px'}); 
-  //       $('.copy').css('display', 'flex').hide().fadeIn(200);
-  //   });
-  // }
 
-  //validation form
-  var long = $('#long-link'), linkDef = $('#link-default'),
-      hyper = new RegExp ('^https://|^http://'),
-      urlExp = new RegExp ('^(https?:\/\/)([\d0-9a-z\\.-]*)(\\.)([a-z]{1,6})([&a-z/\\.-_]*)*?(/)?([^._-]$)$', 'i'),
-      hyperLength = new RegExp ('^([a-z0-9-_]{1,30}[a-z0-9])$', 'i');
+  // validation form
+  var
+      long        = $('#long-link'),
+      linkDef     = $('#link-default'),
+      hyper       = new RegExp ('^https?://'),
+      hyperLength = new RegExp ('^([a-z\\d][\\w-]{1,30}[a-z\\d])$', 'i');
 
 
-  function addStyleForm(linkName) {
-      linkName.addClass('is-invalid');
-      setTimeout(function() {
-        linkName.popover('hide').popover('dispose');
-      }, 3500);
+  function addStyleForm(typeLink) {
+
+    typeLink.addClass('is-invalid');
+
+    setTimeout(function() {
+      typeLink.popover('hide').popover('dispose');
+    }, 3500);
+
   }
 
-  function testedFirst (ev) {
-    if (!long.val()) {
-      long.popover({title: "Пустое поле", content: "Данное поле обязательно для заполнения. Вставьте URL",
-                    placement: "top", delay: { "show": 300, "hide": 300 }}).popover('enable').popover('show');
-      addStyleForm(long);
-      ev.preventDefault();
-    }
-    if (!hyper.test(long.val())) {
-      long.popover({title: "http:// и https://", content: "Ссылка должна начинаться с http:// или https://",
-                    placement: "top", delay: { "show": 300, "hide": 300 }}).popover('enable').popover('show');
-      addStyleForm(long);
-      ev.preventDefault();
-    }
-    if (!urlExp.test(long.val())) {
-      long.popover({title: "Недопустимая комбинация", content: "Ваш URL содержит недопустимые символы или слишком короткий.",
-                    placement: "top", delay: { "show": 300, "hide": 300 }}).popover('enable').popover('show');
-      addStyleForm(long);
-      ev.preventDefault();
-    }
+
+  function popoverSet(typeLink, title, description) {
+
+    typeLink.popover({
+                            title: title,
+                          content: description, 
+                        placement: "top",
+                            delay: { "show": 300, "hide": 300 }
+                      })
+            .popover('enable')
+            .popover('show');
+
+    addStyleForm(typeLink);
+
+  }
+
+
+  // first input validation
+  function testedFirst () {
+    if (!long.val())
+      popoverSet(long, "Пустое поле", "Данное поле обязательно для заполнения. Вставьте URL");
+
+    else if (!hyper.test(long.val()))
+      popoverSet(long, "http:// и https://", "Ссылка должна начинаться с http:// или https://");
+
+    else if (long.val().length<11)
+      popoverSet(long, "Короткий URL", "Разрешенная длина ссылки от 11 символов.");
+
     else {
       long.addClass('is-valid');
+      return true;
     }
   }
 
-  function testedSecond(ev) {
-    if (linkDef.val().length>30) {
+  // second input validation
+  function testedSecond() {
 
-      linkDef.popover({title: "Длина ссылки", content: "Максимальная длина строки ввода не должна превышать 30 символов",
-                    placement: "top", delay: { "show": 300, "hide": 300 }}).popover('enable').popover('show');
-      addStyleForm(linkDef);
-      ev.preventDefault();
-    }
-    if (!hyperLength.test(linkDef.val()) && linkDef.val()) {
+    if (linkDef.val().length<3 && linkDef.val().length>0)
+      popoverSet(linkDef, "Короткая строка", "Разрешенная длина строки ввода от 3 символов.");
 
-      linkDef.popover({title: "Недопустимый формат", content: "Символы для применения: латинский алфавит, цифры и '-','_'",
-                    placement: "top", delay: { "show": 300, "hide": 300 }}).popover('enable').popover('show');
-      addStyleForm(linkDef);
-      ev.preventDefault();
-    }
-    if (linkDef.val()) {
+    else if (!hyperLength.test(linkDef.val()) && linkDef.val())
+      popoverSet(linkDef, "Недопустимый формат", "Допускаются: латинские буквы, цифры и соединительные знаки «-» или «_» .");
+
+    else if (linkDef.val().length>30)
+      popoverSet(linkDef, "Длина ссылки", "Максимальная длина строки ввода не должна превышать 30 символов");
+
+    else if (linkDef.val().length>2 && linkDef.val().length<31 || linkDef.val().length == 0) {
       linkDef.addClass('is-valid');
+      return true;
     }
   }
 
-  $('#formLinks').on('submit', function(e) {
-    if (!long.val()){
-      testedFirst(e);
+
+  // form actions
+  $('.btn-success').on('click', function() {
+
+    // for popover order run - nested condition
+    if (testedFirst()) {
+      if (testedSecond()) {
+        $('#copy-click').hide();
+        $('#responce').fadeOut(200);
+        $('.card').animate({'height': '300px'});
+        $('.ajax-loader').show();
+        showNewLink(); // ajax request
+      }
     }
-    testedSecond(e);
+
   });
 
-  long.on('blur', function(e) {
-    testedFirst(e);
+  long.on('blur', function() {
+    testedFirst();
   });
 
-  long.on('click', function() {
+  linkDef.on('blur', function() {
+
+    if (testedFirst()) {
+        testedSecond(); // order popover actions
+    }
+
+  });
+
+  linkDef.add(long).on('click', function () {
     $(this).removeClass('is-invalid , is-valid');
   });
 
-  linkDef.on('blur', function(e) {
-    testedSecond(e);
-  });
-
-  linkDef.on('click', function() {
-    $(this).removeClass('is-invalid , is-valid');
-  });
-}));
+});
