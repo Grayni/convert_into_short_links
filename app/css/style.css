@@ -6416,9 +6416,17 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   background: rgba(0, 0, 0, 0.9);
 }
 
-.popover.fade {
-  left: 500px;
-  position: absolute;
+.icon-docs {
+  display: none;
+}
+
+/*for fix window scrollbar*/
+@media screen and (min-width: 500px) {
+  html {
+    margin-left: -webkit-calc(100vw - 100%);
+    margin-left: calc(100vw - 100%);
+    margin-right: 0;
+  }
 }
 
 html,
@@ -6429,12 +6437,15 @@ body,
 }
 
 body {
-  background: #343a40;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(5%, #272727), color-stop(30%, #999999), to(#363636));
+  background: -webkit-linear-gradient(top, #272727 5%, #999999 30%, #363636);
+  background: -o-linear-gradient(top, #272727 5%, #999999 30%, #363636);
+  background: linear-gradient(top, #272727 5%, #999999 30%, #363636);
 }
 
 body .card {
-  -webkit-box-shadow: 0 0 4px #1a1a22;
-          box-shadow: 0 0 4px #1a1a22;
+  -webkit-box-shadow: 0 0 1px #737272;
+          box-shadow: 0 0 1px #737272;
   display: none;
   height: 300px;
   max-width: 700px;
@@ -6452,17 +6463,24 @@ body .btn.btn-success {
   width: 200px;
 }
 
-.copy {
+#responce {
   display: none;
   margin: 0;
 }
 
-.copy .icon-docs,
-.copy .sh-link {
+#responce .icon-docs,
+#responce .sh-link {
   cursor: pointer;
 }
 
-.copy .sh-link {
+#responce .sh-link {
   line-height: 40px;
   margin-left: 10px;
+}
+
+.ajax-loader {
+  display: none;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }

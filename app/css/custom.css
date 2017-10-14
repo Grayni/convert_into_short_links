@@ -18,3 +18,15 @@
 .tooltip-inner {
   background:rgba(0,0,0,0.9);
 }
+
+.icon-docs {
+  display: none;
+}
+
+/*for fix window scrollbar*/
+@media screen and (min-width: 500px) { 
+  html {
+    margin-left: calc(100vw - 100%);
+    margin-right: 0;
+  }
+}

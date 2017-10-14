@@ -1,8 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>Сервис создания коротких ссылок</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
@@ -13,7 +13,7 @@
 					<div class="card-header">Используйте оба поля вместе, если хотите создать оригинальную ссылку</div>
 					<div class="card-body">
 
-						<form action="/" method="POST" id="formLinks">
+						<form>
 
 							<input id="long-link" type="text" name="long-link" class="form-control form-control-lg" placeholder="Вставьте вашу ссылку" name="long" />
 
@@ -30,7 +30,7 @@
 							<div class="row">
 								<div class="col"></div>
 								<div class="col-auto">
-									<input type="submit" class="btn btn-success" name="enter" value='Генерировать' />
+									<input type="button" class="btn btn-success" name="enter"  value='Генерировать' />
 								</div>
 
 								<div class="col"></div>
@@ -38,24 +38,22 @@
 
 						</form>
 
+
 						</br>
 
-						<div class="row copy">
-							<div class="col-auto">
-								<span>Ваша ссылка:
-									<a href='#' class='sh-link' id='sh-link'>Тестовая ссылка</a>
-								</span>
+
+						<div class="row " id="block">
+
+							<div class="col-auto" id="responce">
 							</div>
 
 							<div class="col">
-								<button id='copy-click' type='button' class='btn btn-info icon-docs' data-clipboard-target="#sh-link" data-toggle="tooltip" data-placement='top' data-html="true" title='<b style="font-size:16px">Скопировать в буфер</b>'></button>
+								<button id='copy-click' type='button' class='btn btn-info icon-docs' data-clipboard-target="#new-link" data-toggle="tooltip" data-placement='top' data-html="true" title='<b style="font-size:16px">Скопировать в буфер</b>'></button>
 							</div>
 						</div>
 
 					</div>
-					<div id="result_form" style="background:#ffffff;padding: 10px;">
-						<?php include_once 'script.php'; ?>
-					<div> 
+					<img src="img/ajax-loader.gif" height="11" width="43" class="ajax-loader">
 				</div>
 
 				<br>
