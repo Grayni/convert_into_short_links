@@ -1,6 +1,8 @@
-#add unicode
+#version 1.0
 
-AddDefaultCharset UTF-8
+#add unicode
+AddCharset utf-8 .php .html .js
+AddDefaultCharset off
 
 
 
