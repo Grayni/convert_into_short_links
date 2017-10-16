@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab|PT+Sans+Caption&subset=latin,cyrillic)
 // custom code sass
 $h-100: 100%
 $px-10: 10px
@@ -25,23 +26,33 @@ body,
   height: $h-100
 
 body
-  background: linear-gradient(top, #272727 5%,#999999 30%, #363636)
+  background: url('../img/background.jpg') no-repeat center
+  background-size: cover
 
   .card
-    box-shadow: 0 0 1px #737272
+    box-shadow: 0 0 41px #555
     display: $n
     height: $px-300
     max-width: $px-700
     padding: $ziro
 
   .card-header
+    color: #8d8c8c
+    font: 14px 'PT Sans Caption', sans-serif
+    text-transform: uppercase
     text-align: $center
+
+  .card-body
+    padding-bottom: 0
+    overflow: hidden
 
   .btn
     &.btn-success
       cursor: $cur-point
-      font-size: $px-32
+      font: 14px 'PT Sans Caption', sans-serif
       height: $px-50
+      margin-top: 10px
+      text-transform: uppercase
       width: $px-200
 
 #responce
@@ -57,7 +68,7 @@ body
     margin-left: $px-10
 
 .ajax-loader
+  bottom: 10px
   display: $n
   position: absolute
-  bottom: 10px
   right: 10px

@@ -14,7 +14,7 @@ function showNewLink () {
 
     request.onreadystatechange = function() {
 
-        let
+        var
             copy = $('#copy-click'),
             resp = $('#responce'),
             card = $('.card');
@@ -30,21 +30,27 @@ function showNewLink () {
                     if ($('#new-link').length>0) {
                         copy.fadeIn(300);
                     }
+                    $('.btn-success').prop('disabled',false).css({'cursor':'pointer'});
                     $('.ajax-loader').hide();
+                    if ($('.inp-invalid').length) {
+                        $('#long-link').removeClass('is-valid').addClass('is-invalid');
+                    }
 
                 });
             });
         }
     };
 
-    let params = ['long-link','link-default'];
+    var params = ['long-link','link-default'];
 
     function inputId(a) {
         return document.getElementById(a);
     }
 
     // note: encode - against conflict (&) params&params => server
-    params = params.map(L => inputId(L).name + '=' + encodeURIComponent(inputId(L).value));
+    params = params.map(function(L){
+        return inputId(L).name + '=' + encodeURIComponent(inputId(L).value);
+    });
     params = params.join('&');
 
     $('#long-link').keyup(function() {

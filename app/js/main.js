@@ -1262,7 +1262,7 @@ $('ducument').ready(function() {
       long        = $('#long-link'),
       linkDef     = $('#link-default'),
       hyper       = new RegExp ('^https?://'),
-      hyperLength = new RegExp ('^([a-z\\d][\\w-]{1,30}[a-z\\d])$', 'i');
+      hyperLength = new RegExp ('^([a-z][\\w-]{1,29}[a-z\\d])$');
 
 
   function addStyleForm(typeLink) {
@@ -1316,7 +1316,7 @@ $('ducument').ready(function() {
       popoverSet(linkDef, "Короткая строка", "Разрешенная длина строки ввода от 3 символов.");
 
     else if (!hyperLength.test(linkDef.val()) && linkDef.val())
-      popoverSet(linkDef, "Недопустимый формат", "Допускаются: латинские буквы, цифры и соединительные знаки «-» или «_» .");
+      popoverSet(linkDef, "Недопустимый формат", "Допускаются: латинские буквы в нижнем регистре, цифры и соединительные знаки «-» или «_» . Первый знак - буква.");
 
     else if (linkDef.val().length>30)
       popoverSet(linkDef, "Длина ссылки", "Максимальная длина строки ввода не должна превышать 30 символов");
@@ -1334,6 +1334,7 @@ $('ducument').ready(function() {
     // for popover order run - nested condition
     if (testedFirst()) {
       if (testedSecond()) {
+        $(this).prop('disabled', true).css({'cursor':'default'});
         $('#copy-click').hide();
         $('#responce').fadeOut(200);
         $('.card').animate({'height': '300px'});
@@ -1377,7 +1378,7 @@ function showNewLink () {
 
     request.onreadystatechange = function() {
 
-        let
+        var
             copy = $('#copy-click'),
             resp = $('#responce'),
             card = $('.card');
@@ -1393,21 +1394,27 @@ function showNewLink () {
                     if ($('#new-link').length>0) {
                         copy.fadeIn(300);
                     }
+                    $('.btn-success').prop('disabled',false).css({'cursor':'pointer'});
                     $('.ajax-loader').hide();
+                    if ($('.inp-invalid').length) {
+                        $('#long-link').removeClass('is-valid').addClass('is-invalid');
+                    }
 
                 });
             });
         }
     };
 
-    let params = ['long-link','link-default'];
+    var params = ['long-link','link-default'];
 
     function inputId(a) {
         return document.getElementById(a);
     }
 
     // note: encode - against conflict (&) params&params => server
-    params = params.map(L => inputId(L).name + '=' + encodeURIComponent(inputId(L).value));
+    params = params.map(function(L){
+        return inputId(L).name + '=' + encodeURIComponent(inputId(L).value);
+    });
     params = params.join('&');
 
     $('#long-link').keyup(function() {

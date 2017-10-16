@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab|PT+Sans+Caption&subset=latin,cyrillic);
 @font-face {
   font-family: 'fontello';
   src: url("../fonts/fontello/fontello.eot?13090428");
@@ -6394,33 +6395,13 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   color: #212529;
 }
 
-/* uncss:ignore */
-.arrow {
-  left: 93px;
-  bottom: 0;
-}
-
-/* uncss:ignore */
-.arrow::before {
-  content: "";
-  position: absolute;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 5px 0;
-  border-top-color: rgba(0, 0, 0, 0.9);
-  bottom: -4px;
-  left: 50%;
-}
-
-.tooltip-inner {
-  background: rgba(0, 0, 0, 0.9);
-}
-
 .icon-docs {
   display: none;
+  cursor: pointer;
 }
 
 /*for fix window scrollbar*/
+/* uncss:ignore */
 @media screen and (min-width: 500px) {
   html {
     margin-left: -webkit-calc(100vw - 100%);
@@ -6437,15 +6418,14 @@ body,
 }
 
 body {
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(5%, #272727), color-stop(30%, #999999), to(#363636));
-  background: -webkit-linear-gradient(top, #272727 5%, #999999 30%, #363636);
-  background: -o-linear-gradient(top, #272727 5%, #999999 30%, #363636);
-  background: linear-gradient(top, #272727 5%, #999999 30%, #363636);
+  background: url("../img/background.jpg") no-repeat center;
+  -webkit-background-size: cover;
+          background-size: cover;
 }
 
 body .card {
-  -webkit-box-shadow: 0 0 1px #737272;
-          box-shadow: 0 0 1px #737272;
+  -webkit-box-shadow: 0 0 41px #555;
+          box-shadow: 0 0 41px #555;
   display: none;
   height: 300px;
   max-width: 700px;
@@ -6453,13 +6433,23 @@ body .card {
 }
 
 body .card-header {
+  color: #8d8c8c;
+  font: 14px 'PT Sans Caption', sans-serif;
+  text-transform: uppercase;
   text-align: center;
+}
+
+body .card-body {
+  padding-bottom: 0;
+  overflow: hidden;
 }
 
 body .btn.btn-success {
   cursor: pointer;
-  font-size: 18px;
+  font: 14px 'PT Sans Caption', sans-serif;
   height: 50px;
+  margin-top: 10px;
+  text-transform: uppercase;
   width: 200px;
 }
 
@@ -6479,8 +6469,8 @@ body .btn.btn-success {
 }
 
 .ajax-loader {
+  bottom: 10px;
   display: none;
   position: absolute;
-  bottom: 10px;
   right: 10px;
 }

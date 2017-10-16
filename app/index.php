@@ -55,9 +55,6 @@
 					</div>
 					<img src="img/ajax-loader.gif" height="11" width="43" class="ajax-loader">
 				</div>
-
-				<br>
-
 			</div>
 		</div>
 		<script src="js/main.js"></script>
