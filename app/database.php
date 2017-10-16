@@ -2,9 +2,6 @@
 
 	include_once('../../admin.php');
 
-	$domain            = 'http://mysite/'; //http://links.grayni.ru/
-	$fantasy_full_link = $domain . $fantasy;
-
 	function copy_box($title,$need_link) {
 		echo "<span>
 				$title
@@ -15,6 +12,14 @@
 	}
 
 	$mysqli = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_LINK);
+
+	$domain    = 'http://mysite/'; //http://links.grayni.ru/
+
+	// protect mysql
+	$long_link = mysqli_real_escape_string($mysqli, $long_link);
+	$fantasy   = mysqli_real_escape_string($mysqli, $fantasy);
+
+	$fantasy_full_link = $domain . $fantasy;
 
 	if (mysqli_connect_error()) {
 
