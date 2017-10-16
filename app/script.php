@@ -7,7 +7,7 @@
 	$fantasy = htmlspecialchars(trim($_POST["fantasy-link"]));
 
 	// connect convert Russian domains
-	include_once('class/idna_convert.class.php'); 
+	include_once('class/idna_convert.class.php');
 
 	$IDN = new idna_convert();
 	$long_link = $IDN->encode($long_link);
