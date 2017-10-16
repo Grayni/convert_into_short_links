@@ -54,7 +54,7 @@ $('ducument').ready(function() {
 
     typeLink.popover({
                             title: title,
-                          content: description, 
+                          content: description,
                         placement: "top",
                             delay: { "show": 300, "hide": 300 }
                       })
