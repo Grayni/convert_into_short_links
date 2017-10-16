@@ -54,14 +54,13 @@ var
   autoprefixer  = require('gulp-autoprefixer'),
   rigger        = require('gulp-rigger'),
   plumber       = require('gulp-plumber'),
-  uncss         = require('gulp-uncss'),
+  //uncss         = require('gulp-uncss'),
   strip         = require('gulp-strip-code');
   plugin.imagemin.pngquant  = require('imagemin-pngquant');
   plugin.imagemin.mozjpeg   = require('imagemin-mozjpeg');
 
 
 var localhost = 'mysite', localhost2 = 'dist';
-
 
 /* app */
 
@@ -140,10 +139,6 @@ gulp.task('min-js',['scripts'] , function() {
 
 gulp.task('min-css',['sass'], function() {
   return gulp.src('app/css/style.css')
-  .pipe(uncss({
-            html: ['app/index.php'],
-            ignore: ['.tooltip-inner', '.arrow', '.arrow::before']
-        }))
   .pipe(strip())
   .pipe(gulp.dest('dist/css'))
   .pipe(rename('style.min.css'))
@@ -165,6 +160,12 @@ gulp.task('fixHtml', function() {
 gulp.task('pagesPhp', function() {
   gulp.src('app/pages/*.+(html|php)')
   .pipe(gulp.dest('dist/pages'));
+});
+
+// add dir /class/ in dist
+gulp.task('pagesPhp', function() {
+  gulp.src('app/class/*.+(html|php)')
+  .pipe(gulp.dest('dist/class'));
 });
 
 // build file of project
