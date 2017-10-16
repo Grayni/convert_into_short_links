@@ -1412,7 +1412,7 @@ function showNewLink () {
     }
 
     // note: encode - against conflict (&) params&params => server
-    params = params.map(function(L){
+    params = params.map(function(L) {
         return inputId(L).name + '=' + encodeURIComponent(inputId(L).value);
     });
     params = params.join('&');

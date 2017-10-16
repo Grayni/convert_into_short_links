@@ -2,6 +2,24 @@
 
 	include_once('../../admin.php');
 
+
+	// function create file and in this file function redirect parent-link
+	function redirect_in($target, $link_and_name) {
+
+		// config for create file with header redirect
+		$code_for_php = 
+		"<?php
+			header(\"Location: \" . \"$target\");
+			exit;
+		";
+
+		$file_php = fopen("pages/$link_and_name.php", "w");
+		fwrite($file_php, $code_for_php);
+		fclose($file_php);
+	}
+
+
+	// show message with link and button copy-link
 	function copy_box($title,$need_link) {
 		echo "<span>
 				$title
@@ -11,9 +29,13 @@
 			</span>";
 	}
 
+
+
+
 	$mysqli = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_LINK);
 
 	$domain    = 'http://mysite/'; //http://links.grayni.ru/
+
 
 	// protect mysql
 	$long_link = mysqli_real_escape_string($mysqli, $long_link);
@@ -102,6 +124,9 @@
 					// reset query
 					mysqli_free_result($result_write_link);
 
+					// create file for redirect
+					redirect_in($long_link, $fantasy);
+
 					echo copy_box("Ваша новая ссылка: ",$fantasy_full_link);
 				}
 			}
@@ -125,9 +150,11 @@
 
 				// ID last writen row
 				$id_link = mysqli_insert_id($mysqli);
+				$link_konvert = base_convert($id_link, 10, 36);
 
+				//conv('{$id_link}', 10, 36) for mysql
 				$update_generate  = "UPDATE auto_links ";
-				$update_generate .= "SET generate = concat('http://links.grayni.ru/', conv('{$id_link}', 10, 36)) ";
+				$update_generate .= "SET generate = concat('{$domain}','{$link_konvert}') ";
 				$update_generate .= "WHERE id='{$id_link}'";
 
 				$result_write_link = mysqli_query($mysqli, $update_generate);
@@ -151,6 +178,9 @@
 
 				// reset query write
 				mysqli_free_result($result_write_link);
+
+				// create file for redirect
+				redirect_in($long_link, $link_konvert);
 
 				copy_box("Ваша ссылка: ", $and_link);
 
