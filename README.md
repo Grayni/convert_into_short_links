@@ -28,7 +28,8 @@
          For example, russian domain домены.рф consist out cyrillic symbols.  
          For correctly check on 404 error and exist need to apply this class.
 ***
-#### For view and use visit: [links.grayni.ru]:http://links.grayni.ru
+#### For view and use visit:
+[links.grayni.ru](http://links.grayni.ru)
 ***
 ### Status: in test mode
 
