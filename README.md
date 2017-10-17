@@ -18,16 +18,17 @@
          Mysql for write links from users.  
          PHP and Mysql together generate new short links.  
          Was used math function base_convert() for conversion 10-number system  
-         in max possibe number system - 36, used only function PHP and Mysql.  For Mysql can use function for string conv().  
+         in max possibe number system - 36, used only function PHP and Mysql.  
+         For Mysql can use function for string conv().  
          Different in this functions: base_convert() - used only small letters,  
-         conv() - only big. For extension functional project can combine this functions for create yet more variants strings.
+         conv() - only big. For extension functional project can combine  
+         this functions for create yet more variants strings.
       5) ##### Class idna_convert (php).
          Idna used for correctly check foreign domain consisting out not latin world.  
          For example, russian domain домены.рф consist out cyrillic symbols.  
          For correctly check on 404 error and exist need to apply this class.
 ***
-#### For view and use visit:
-    <http://links.grayni.ru>
+#### For view and use visit: [links.grayni.ru]:http://links.grayni.ru
 ***
 ### Status: in test mode
 
