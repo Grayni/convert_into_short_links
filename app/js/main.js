@@ -1262,7 +1262,7 @@ $('ducument').ready(function() {
       long        = $('#long-link'),
       linkDef     = $('#link-default'),
       hyper       = new RegExp ('^https?://'),
-      hyperLength = new RegExp ('^([a-z][\\w-]{1,29}[a-z\\d])$');
+      hyperLength = new RegExp ('^([a-z\\d][\\w-]{1,29}[a-z\\d])$','i');
 
 
   function addStyleForm(typeLink) {
@@ -1316,7 +1316,7 @@ $('ducument').ready(function() {
       popoverSet(linkDef, "Короткая строка", "Разрешенная длина строки ввода от 3 символов.");
 
     else if (!hyperLength.test(linkDef.val()) && linkDef.val())
-      popoverSet(linkDef, "Недопустимый формат", "Допускаются: латинские буквы в нижнем регистре, цифры и соединительные знаки «-» или «_» . Первый знак - буква.");
+      popoverSet(linkDef, "Недопустимый формат", "Допускаются: латинские буквы, цифры и соединительные знаки «-» или «_» .");
 
     else if (linkDef.val().length>30)
       popoverSet(linkDef, "Длина ссылки", "Максимальная длина строки ввода не должна превышать 30 символов");

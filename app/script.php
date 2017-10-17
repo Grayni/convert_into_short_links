@@ -17,8 +17,8 @@
 	}
 
 	// error validation
-	function span_error($error_type, $styleBorder) {
-		return "<span class='sh-link {$styleBorder}' style='color:#e33333;'>".$error_type."</span>";
+	function span_error($error_type, $style_border = "red") {
+		return "<span class='sh-link {$style_border}' style='color:#e33333;'>".$error_type."</span>";
 	}
 
 
@@ -53,8 +53,8 @@
 	else if ( strlen($fantasy)>0 && strlen($fantasy)<3|| strlen($fantasy)>30 )
 		echo span_error("Неверная длина ссылки. Длина должна составлять от 3 до 30 символов.");
 
-	else if (!preg_match("/^([a-z][\w-]{1,29}[a-z\d])$/", $fantasy) && strlen($fantasy)>0)
-		echo span_error("Поле 2. Разрешено: латинские буквы в нижнем регистре, цифры и СОЕДИНИТЕЛЬНЫЕ знаки «-», «_». Первый знак буква.");
+	else if (!preg_match("/^([a-z\d][\w-]{1,29}[a-z\d])$/i", $fantasy) && strlen($fantasy)>0)
+		echo span_error("Поле 2. Доступные символы: латинские буквы, цифры и СОЕДИНИТЕЛЬНЫЕ знаки «-», «_».");
 
 	// result
 	else include_once('database.php');
