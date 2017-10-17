@@ -12,7 +12,7 @@
 2. **Bootstrap v4.0.0-beta**  
     For designe and build grid.  
 
-3. **JQuery, javaScript, Ajax**
+3. **JQuery, javaScript, Ajax**  
     For interaction with user and frontend-validation form.  
     Also Ajax was involved for interaction with php.  
 
@@ -30,7 +30,7 @@
     _conv()_ - only big. For extension functional project can combine  
     this functions for create yet more variants strings.
 
-5. **Class idna_convert (php)**
+5. **Class idna_convert (php)**  
     Idna used for correctly check foreign domain consisting out not latin world.  
     For example, russian domain _домены.рф_ consist out cyrillic symbols.  
     For correctly check on 404 error and exist need to apply this class.  
