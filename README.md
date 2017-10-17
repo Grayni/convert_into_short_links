@@ -25,7 +25,7 @@
          For correctly check on 404 error and exist need to apply this class.
 ***
 #### For view and use visit:
-    [http://links.grayni.ru](links.grayni.ru)
+    [links.grayni.ru]:http://links.grayni.ru
 ***
 ### Status: in test mode
 
